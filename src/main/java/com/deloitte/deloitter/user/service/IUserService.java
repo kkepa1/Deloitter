@@ -10,5 +10,5 @@ public interface IUserService {
 
     User updateUser(User user);
 
-    void deleteUserByName(String name);
+    String deleteUserByName(String name);
 }
