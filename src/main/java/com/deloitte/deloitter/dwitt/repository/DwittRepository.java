@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DwittRepository extends JpaRepository<Dwitt, Long> {
+public interface DwittRepository extends JpaRepository<Dwitt, Integer> {
 
-    Dwitt findDwittById(Long id);
-
-    List<Dwitt> findAllByUserId(Long user_id);
 }

@@ -2,64 +2,36 @@ package com.deloitte.deloitter.user.entity;
 
 
 import com.deloitte.deloitter.dwitt.entity.Dwitt;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
+    @Column(name = "id", unique = true, nullable = false)
+    private int id;
 
-    @Column(name = "login")
-    private String name;
-    @Column(name = "password")
+    @Column(name = "login", nullable = false, length = 30)
+    private String login;
+
+    @Column(name = "password", nullable = false, length = 250)
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<Dwitt> dwitts;
-
-    public User() {
-    }
-
-    public User(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String toString() {
-        return "TutorialUser{" +
-                "id=" + id +
-                ", username='" + name + '\'' +
-                '}';
-    }
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_dwitt",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "dwitt_id")
+    )
+    private Set<Dwitt> dwitts = new HashSet<>();
 }

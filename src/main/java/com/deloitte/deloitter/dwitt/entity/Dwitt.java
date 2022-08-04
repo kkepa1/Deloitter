@@ -1,63 +1,30 @@
 package com.deloitte.deloitter.dwitt.entity;
 
 import com.deloitte.deloitter.user.entity.User;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "dwitts")
 public class Dwitt {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "content")
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id", nullable = false)
-    private User user;
-
-    public Dwitt() {
-    }
-
-    public Dwitt(String content, User user) {
-        this.content = content;
-        this.user = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Dwitt{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", user=" + user +
-                '}';
-    }
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "dwitts"
+    )
+    private Set<User> users = new HashSet<>();
 }
