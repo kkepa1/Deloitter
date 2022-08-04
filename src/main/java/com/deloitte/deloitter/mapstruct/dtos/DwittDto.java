@@ -14,7 +14,4 @@ public class DwittDto {
 
     @JsonProperty("content")
     private String content;
-
-    @JsonProperty("user_id")
-    private User user;
 }
