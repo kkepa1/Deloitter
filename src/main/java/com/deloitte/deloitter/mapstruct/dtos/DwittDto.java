@@ -1,7 +1,6 @@
 package com.deloitte.deloitter.mapstruct.dtos;
 
 
-import com.deloitte.deloitter.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
