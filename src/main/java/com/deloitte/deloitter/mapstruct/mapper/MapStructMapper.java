@@ -5,6 +5,8 @@ import com.deloitte.deloitter.mapstruct.dtos.*;
 import com.deloitte.deloitter.user.entity.User;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(
         componentModel = "spring"
 )
@@ -19,4 +21,6 @@ public interface MapStructMapper {
     UserDeleteDto userToUserDeleteDto(UserDeleteDto userDeleteDto);
 
     DwittDto dwittToDwittDto(Dwitt dwitt);
+
+    List<DwittDto> dwittsToDwittDtoList(List<Dwitt> dwitts);
 }
