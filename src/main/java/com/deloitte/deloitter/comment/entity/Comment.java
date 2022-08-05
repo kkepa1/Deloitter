@@ -1,5 +1,6 @@
 package com.deloitte.deloitter.comment.entity;
 
+import com.deloitte.deloitter.dwitt.entity.Dwitt;
 import com.deloitte.deloitter.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +28,12 @@ public class Comment {
             nullable = false
     )
     private User user;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "dwitt_id",
+            referencedColumnName = "id",
+            nullable = false
+    )
+    private Dwitt dwitt;
 }
