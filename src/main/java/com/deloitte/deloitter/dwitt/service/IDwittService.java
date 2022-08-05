@@ -13,7 +13,7 @@ public interface IDwittService {
 
     Dwitt saveDwitt(Dwitt dwitt);
 
-    Dwitt updateDwitt(Dwitt dwitt);
+    DwittDto updateDwitt(Dwitt dwitt);
 
-//    String deleteDwittById(Long id);
+    String deleteDwittById(Long id);
 }
