@@ -7,6 +7,8 @@ import com.deloitte.deloitter.mapstruct.dtos.UserPostDto;
 import com.deloitte.deloitter.user.entity.User;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(
         componentModel = "spring"
 )
@@ -17,4 +19,6 @@ public interface MapStructMapper {
     User userPostDtoToUser(UserPostDto userPostDto);
 
     DwittDto dwittToDwittDto(Dwitt dwitt);
+
+    List<DwittDto> dwittsToDwittDtoList(List<Dwitt> dwitts);
 }

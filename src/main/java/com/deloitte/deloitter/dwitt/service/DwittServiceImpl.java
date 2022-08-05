@@ -2,6 +2,8 @@ package com.deloitte.deloitter.dwitt.service;
 
 import com.deloitte.deloitter.dwitt.entity.Dwitt;
 import com.deloitte.deloitter.dwitt.repository.DwittRepository;
+import com.deloitte.deloitter.mapstruct.dtos.DwittDto;
+import com.deloitte.deloitter.mapstruct.mapper.MapStructMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,18 +15,26 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 public class DwittServiceImpl implements IDwittService {
 
+    private DwittRepository dwittRepository;
+
+    private MapStructMapper mapStructMapper;
+
     @Autowired
-    DwittRepository dwittRepository;
+    public DwittServiceImpl(DwittRepository dwittRepository, MapStructMapper mapStructMapper) {
+        this.dwittRepository = dwittRepository;
+        this.mapStructMapper = mapStructMapper;
+    }
+
 
     @Override
-    public Dwitt findDwittById(Long id) {
-        return dwittRepository.findDwittById(id);
+    public DwittDto findDwittById(Long id) {
+        return mapStructMapper.dwittToDwittDto(dwittRepository.findDwittById(id));
     }
 
     @Override
-    public List<Dwitt> findAllByUserId(Long user_id) {
+    public List<DwittDto> findAllByUserId(Long user_id) {
         if (dwittRepository.findAllByUserId(user_id) != null) {
-            return dwittRepository.findAllByUserId(user_id);
+            return mapStructMapper.dwittsToDwittDtoList(dwittRepository.findAllByUserId(user_id));
         }
         throw new ResponseStatusException(NOT_FOUND, "unable to find dwitts with given user_id");
     }
@@ -48,14 +58,14 @@ public class DwittServiceImpl implements IDwittService {
         throw new ResponseStatusException(NOT_FOUND, "unable to find dwitt with given id");
     }
 
-    @Override
-    public String deleteDwittById(Long id) {
-        if (dwittRepository.findDwittById(id) != null) {
-            dwittRepository.delete(findDwittById(id));
-            return "dwitt deleted";
-        }
-        throw new ResponseStatusException(NOT_FOUND, "unable to find dwitt with given id");
-    }
+//    @Override
+//    public String deleteDwittById(Long id) {
+//        if (dwittRepository.findDwittById(id) != null) {
+//            dwittRepository.delete(findDwittById(id));
+//            return "dwitt deleted";
+//        }
+//        throw new ResponseStatusException(NOT_FOUND, "unable to find dwitt with given id");
+//    }
 
 
 }
