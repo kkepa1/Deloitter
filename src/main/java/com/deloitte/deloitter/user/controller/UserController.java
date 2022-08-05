@@ -7,7 +7,10 @@ import com.deloitte.deloitter.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -30,7 +33,7 @@ public class UserController {
     public ResponseEntity<UserGetDto> getUser(@PathVariable(value = "id") int id) {
         return new ResponseEntity<>(
                 mapstructMapper.userToUserDto(
-                        userRepository.findById(id).get()
+                        userRepository.findById(id).orElse(null)
                 ),
                 HttpStatus.OK
         );

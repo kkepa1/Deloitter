@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,20 +17,17 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "login", nullable = false, length = 30)
+    @Column(name = "login")
     private String login;
 
-    @Column(name = "password", nullable = false, length = 250)
+    @Column(name = "password")
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_dwitt",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "dwitt_id")
-    )
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "user")
     private Set<Dwitt> dwitts = new HashSet<>();
 }

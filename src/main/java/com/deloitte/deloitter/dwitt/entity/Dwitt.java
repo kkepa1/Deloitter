@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -22,9 +20,11 @@ public class Dwitt {
     @Column(name = "content")
     private String content;
 
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "dwitts"
+    @ManyToOne
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "id",
+            nullable = false
     )
-    private Set<User> users = new HashSet<>();
+    private User user;
 }
