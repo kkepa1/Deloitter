@@ -20,18 +20,20 @@ public class DwittController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<DwittDto> getDwitt(@PathVariable Long id) {
-        return new ResponseEntity<>(
-                dwittService.findDwittById(id),
-                HttpStatus.OK
-        );
+        DwittDto foundDwitt = dwittService.findDwittById(id);
+        if (foundDwitt == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(foundDwitt, HttpStatus.OK);
     }
 
     @GetMapping(value = "")
     public ResponseEntity<List<DwittDto>> getDwittsByUser(@RequestParam("userId") Long userId) {
-        return new ResponseEntity<>(
-                dwittService.findAllByUserId(userId),
-                HttpStatus.OK
-        );
+        List<DwittDto> foundDwitts = dwittService.findAllByUserId(userId);
+        if (foundDwitts.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(foundDwitts, HttpStatus.OK);
     }
 
     @PostMapping(value = "")
@@ -40,5 +42,18 @@ public class DwittController {
                 dwittService.saveDwitt(dwitt),
                 HttpStatus.OK
         );
+    }
+
+    @PutMapping(value = "")
+    public ResponseEntity<DwittDto> updateDwitt(@Valid @RequestBody Dwitt dwitt) {
+        return new ResponseEntity<>(
+                dwittService.updateDwitt(dwitt),
+                HttpStatus.OK
+        );
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public String deleteDwitt(@PathVariable Long id) {
+        return dwittService.deleteDwittById(id);
     }
 }

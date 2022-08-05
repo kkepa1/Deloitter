@@ -49,23 +49,23 @@ public class DwittServiceImpl implements IDwittService {
     }
 
     @Override
-    public Dwitt updateDwitt(Dwitt dwitt) {
+    public DwittDto updateDwitt(Dwitt dwitt) {
         Dwitt upDwitt = dwittRepository.findDwittById(dwitt.getId());
         if (upDwitt != null) {
             upDwitt.setContent(dwitt.getContent());
-            return dwittRepository.save(upDwitt);
+            return mapStructMapper.dwittToDwittDto(dwittRepository.save(upDwitt));
         }
         throw new ResponseStatusException(NOT_FOUND, "unable to find dwitt with given id");
     }
 
-//    @Override
-//    public String deleteDwittById(Long id) {
-//        if (dwittRepository.findDwittById(id) != null) {
-//            dwittRepository.delete(findDwittById(id));
-//            return "dwitt deleted";
-//        }
-//        throw new ResponseStatusException(NOT_FOUND, "unable to find dwitt with given id");
-//    }
+    @Override
+    public String deleteDwittById(Long id) {
+        if (dwittRepository.findDwittById(id) != null) {
+            dwittRepository.delete(dwittRepository.findDwittById(id));
+            return "dwitt deleted";
+        }
+        throw new ResponseStatusException(NOT_FOUND, "unable to find dwitt with given id");
+    }
 
 
 }
