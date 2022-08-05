@@ -5,6 +5,7 @@ import com.deloitte.deloitter.mapstruct.dtos.*;
 import com.deloitte.deloitter.user.entity.User;
 import org.mapstruct.Mapper;
 
+import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @Mapper(
@@ -23,4 +24,8 @@ public interface MapStructMapper {
     DwittDto dwittToDwittDto(Dwitt dwitt);
 
     List<DwittDto> dwittsToDwittDtoList(List<Dwitt> dwitts);
+
+    CommentDto commentToCommentDto(Comment comment);
+
+    List<CommentDto> commentToCommentDtoList(List<Comment> comments);
 }
