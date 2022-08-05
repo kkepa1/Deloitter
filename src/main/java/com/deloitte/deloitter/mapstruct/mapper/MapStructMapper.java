@@ -1,11 +1,12 @@
 package com.deloitte.deloitter.mapstruct.mapper;
 
+import com.deloitte.deloitter.comment.entity.Comment;
 import com.deloitte.deloitter.dwitt.entity.Dwitt;
 import com.deloitte.deloitter.mapstruct.dtos.*;
 import com.deloitte.deloitter.user.entity.User;
 import org.mapstruct.Mapper;
 
-import javax.xml.stream.events.Comment;
+
 import java.util.List;
 
 @Mapper(

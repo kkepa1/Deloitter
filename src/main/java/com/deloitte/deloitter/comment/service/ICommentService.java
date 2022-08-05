@@ -3,7 +3,6 @@ package com.deloitte.deloitter.comment.service;
 import com.deloitte.deloitter.comment.entity.Comment;
 import com.deloitte.deloitter.mapstruct.dtos.CommentDto;
 
-import javax.xml.stream.events.Comment;
 import java.util.List;
 
 public interface ICommentService {
@@ -14,6 +13,7 @@ public interface ICommentService {
 
     Comment saveComment(Comment comment);
 
-    Comment updateComment(Comment comment);
+    CommentDto updateComment(Comment comment);
 
+    String deleteCommentById(Long id);
 }

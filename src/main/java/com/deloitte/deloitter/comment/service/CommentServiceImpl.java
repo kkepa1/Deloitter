@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.xml.stream.events.Comment;
+import com.deloitte.deloitter.comment.entity.Comment;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -49,12 +49,11 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public Comment updateComment(Comment comment) {
+    public CommentDto updateComment(Comment comment) {
         Comment upComment = commentRepository.findCommentById(comment.getId());
         if (upComment != null) {
             upComment.setContent(comment.getContent());
             return mapStructMapper.commentToCommentDto(commentRepository.save(upComment));
-        }
         }
         throw new ResponseStatusException(NOT_FOUND, "unable to find comment with given id");
     }
