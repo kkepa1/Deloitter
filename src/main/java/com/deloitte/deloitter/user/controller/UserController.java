@@ -1,42 +1,52 @@
 package com.deloitte.deloitter.user.controller;
 
 
+import com.deloitte.deloitter.mapstruct.dtos.UserDeleteDto;
+import com.deloitte.deloitter.mapstruct.dtos.UserGetAllDto;
 import com.deloitte.deloitter.mapstruct.dtos.UserGetDto;
+import com.deloitte.deloitter.mapstruct.dtos.UserPostDto;
 import com.deloitte.deloitter.mapstruct.mapper.MapStructMapper;
+import com.deloitte.deloitter.user.entity.User;
 import com.deloitte.deloitter.user.repository.UserRepository;
+import com.deloitte.deloitter.user.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
 
-    private MapStructMapper mapstructMapper;
-
-    private UserRepository userRepository;
+    private UserServiceImpl userService;
 
     @Autowired
     public UserController(
-            MapStructMapper mapstructMapper,
-            UserRepository userRepository
+            UserServiceImpl userService
     ) {
-        this.mapstructMapper = mapstructMapper;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserGetDto> getUser(@PathVariable(value = "id") int id) {
-        return new ResponseEntity<>(
-                mapstructMapper.userToUserDto(
-                        userRepository.findById(id).orElse(null)
-                ),
-                HttpStatus.OK
-        );
+    public ResponseEntity<UserGetDto> getUser(@PathVariable(value = "id") Long id) {
+        return userService.getUser(id);
+    }
+
+    @GetMapping("/{id}/all")
+    public ResponseEntity<UserGetAllDto> getUserAll(@PathVariable(value = "id") Long id) {
+        return userService.getUserAll(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> createUser(@Valid @RequestBody UserPostDto userPostDto){
+        return userService.createUser(userPostDto);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteUser(@Valid @RequestBody UserDeleteDto userDeleteDto){
+        return userService.deleteUser(userDeleteDto);
     }
 
 //    @GetMapping(value = "/{login}")

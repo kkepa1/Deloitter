@@ -8,11 +8,11 @@
 		<version>2.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.mapstruct</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.deloitte</groupId>
+	<artifactId>Deloitter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MapStruct Demo</name>
-	<description>Demo project for MapStruct and Spring Boot</description>
+	<name>Deloitter</name>
+	<description>Deloitter</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
