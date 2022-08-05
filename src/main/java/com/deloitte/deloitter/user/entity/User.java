@@ -1,6 +1,7 @@
 package com.deloitte.deloitter.user.entity;
 
 
+import com.deloitte.deloitter.comment.entity.Comment;
 import com.deloitte.deloitter.dwitt.entity.Dwitt;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +32,8 @@ public class User {
             mappedBy = "user")
     private Set<Dwitt> dwitts = new HashSet<>();
 
-//    @OneToMany(
-//            fetch = FetchType.LAZY,
-//            mappedBy = "user")
-//    private Set<Comment> comments = new HashSet<>();
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "user")
+    private Set<Comment> comments = new HashSet<>();
 }

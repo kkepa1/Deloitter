@@ -1,5 +1,6 @@
 package com.deloitte.deloitter.mapstruct.dtos;
 
+import com.deloitte.deloitter.comment.entity.Comment;
 import com.deloitte.deloitter.dwitt.entity.Dwitt;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -20,6 +21,6 @@ public class UserGetAllDto {
     @JsonProperty("dwitts")
     private Set<DwittDto> dwitts;
 
-//    @JsonProperty("comments")
-//    private Set<Comment> comments;
+    @JsonProperty("comments")
+    private Set<CommentDto> comments;
 }

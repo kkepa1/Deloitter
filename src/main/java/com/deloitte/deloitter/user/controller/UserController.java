@@ -49,28 +49,4 @@ public class UserController {
         return userService.deleteUser(userDeleteDto);
     }
 
-//    @GetMapping(value = "/{login}")
-//    public User getUser(@PathVariable String login) {
-//        return userService.findUserByLogin(login);
-//    }
-//
-//    @PostMapping(value = "")
-//    public User saveUser(@Valid @RequestBody User user) {
-//        return userService.saveUser(user);
-//    }
-//
-//    @PutMapping(value = "")
-//    public User updateUser(@Valid @RequestBody User user) {
-//        return userService.updateUser(user);
-//    }
-//
-//    @DeleteMapping(value = "/{login}")
-//    public void deleteUser(@PathVariable String login) {
-//        userService.deleteUserByLogin(login);
-//    }
-//
-//    @GetMapping(value = "/{login}/dwitts")
-//    public List<Dwitt> getUserDwitts(@PathVariable String login) {
-//        return userService.getUserDwitts(login);
-//    }
 }
